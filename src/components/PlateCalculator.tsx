@@ -103,7 +103,7 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
       plateElements.push(
         <div
           key="collar"
-          className="w-4 h-8 bg-gradient-to-b from-yellow-400 to-yellow-600 border-2 border-yellow-700 rounded flex items-center justify-center"
+          className="w-4 h-8 bg-gradient-to-b from-gray-200 to-gray-500 border-2 border-gray-400 rounded flex items-center justify-center"
           title="Comp. Collar"
         />
       );
@@ -185,12 +185,12 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
           </div>
 
           {/* Plate Selection */}
-          <div className="flex flex-wrap gap-2 items-center justify-center">
+          <div className="flex flex-wrap gap-3 items-center justify-center">
             {plates.map((plate) => (
               <button
                 key={plate.weight}
                 onClick={() => addPlate(plate.weight)}
-                className={`w-8 ${plate.color} rounded text-white font-bold shadow-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+                className={`w-4 ${plate.color} rounded text-white text-xs font-bold shadow-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
                 style={{ height: `${plate.height}px` }}
               >
                 {plate.weight}
