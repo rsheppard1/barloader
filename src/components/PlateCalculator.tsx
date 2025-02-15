@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { TrashIcon } from '@heroicons/react/20/solid';
-import { FaGithub, FaInfoCircle } from 'react-icons/fa'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
+import { FaInfoCircle } from 'react-icons/fa'
 
 // Define plate types with weights, colors, and pixel heights
 const plates = [
@@ -118,19 +118,11 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <div className={`p-2`}>
       <div className={`w-full max-w-2xl mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg rounded-lg p-6`}>
-      <a 
-        href="https://github.com/rsheppard1/barloader" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-      >
-        <FaGithub size={18} />
-      </a>
       <Popover>
-        <PopoverButton className="absolute h-2 w-2 top-4 right-12 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+        <PopoverButton className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
           <FaInfoCircle size={18} />
         </PopoverButton>
-        <PopoverPanel className="absolute z-10 top-10 right-8 w-80 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4">
+        <PopoverPanel className="absolute z-10 top-10 right-4 w-80 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4">
           <div className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             1. Choose the barbell weight.
             <br /><br />
