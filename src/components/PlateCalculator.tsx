@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { TrashIcon } from '@heroicons/react/20/solid';
-import { FaGithub } from 'react-icons/fa'
+import { FaGithub, FaInfoCircle } from 'react-icons/fa'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 
 // Define plate types with weights, colors, and pixel heights
 const plates = [
@@ -121,10 +122,26 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
         href="https://github.com/rsheppard1/barloader" 
         target="_blank" 
         rel="noopener noreferrer" 
-        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300" // Styling
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
       >
-        <FaGithub size={24} />
+        <FaGithub size={18} />
       </a>
+      <Popover>
+        <PopoverButton className="absolute h-2 w-2 top-4 right-12 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+          <FaInfoCircle size={18} />
+        </PopoverButton>
+        <PopoverPanel className="absolute z-10 top-10 right-8 w-80 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4">
+          <div className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            1. Choose the barbell weight.
+            <br /><br />
+            2. Specify whether competition collars are being used.
+            <br /><br />
+            3. Click plates to add them to the barbell visualisation. Tap to remove.
+            <br /><br />
+            Or, enter a target weight and the app will determine the necessary plates.
+          </div>
+        </PopoverPanel>
+      </Popover>
         <h2 className={`text-2xl font-bold text-center ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
           Barbell Plate Calculator
         </h2>
