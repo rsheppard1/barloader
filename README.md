@@ -57,12 +57,6 @@ A web application for powerlifters to visually calculate what plates to load on 
 
 No License
 
-## Future Enhancements
-
-*   Plate availability selection.
-*   More advanced plate selection (e.g., drag-and-drop).
-*   LBs support.
-
 ## Contact
 
 Rachel Sheppard - rshepp261@gmail.com
