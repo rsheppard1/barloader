@@ -17,22 +17,11 @@ const plates = [
 
 const barWeights = [15, 20];
 
-const PlateCalculator = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const [barWeight, setBarWeight] = useState(20);
   const [useCollars, setUseCollars] = useState(false);
   const [targetWeight, setTargetWeight] = useState('');
   const [loadedPlates, setLoadedPlates] = useState<number[]>([]);
-
-  // Dark mode detection
-  useEffect(() => {
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(darkModeMediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-    darkModeMediaQuery.addEventListener('change', handler);
-    return () => darkModeMediaQuery.removeEventListener('change', handler);
-  }, []);
 
   // Recalculate plates when bar weight changes
   useEffect(() => {
