@@ -17,7 +17,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'} transition-colors duration-300`}>
+    <main className={`${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'} transition-colors duration-300`}>
       <PlateCalculator isDarkMode={isDarkMode} /> {/* Pass isDarkMode prop */}
       <Analytics />
     </main>
