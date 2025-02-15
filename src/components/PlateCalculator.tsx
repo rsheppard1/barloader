@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
+import { TrashIcon } from '@heroicons/react/20/solid';
 
 // Define plate types with weights, colors, and pixel heights
 const plates = [
@@ -163,8 +164,9 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <input
               type="number"
               value={targetWeight}
+              min="0"
               onChange={(e) => handleWeightInput(e.target.value)}
-              className={`block w-32 rounded-lg py-2 px-3 text-lg font-semibold ${
+              className={`block w-36 rounded-lg text-center p-2 text-lg font-semibold ${
                 isDarkMode 
                   ? 'bg-gray-700 text-white border-gray-600' 
                   : 'bg-white border-gray-300'
@@ -173,13 +175,13 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
             />
             <button
               onClick={clearPlates}
-              className={`px-4 py-2 rounded-lg text-lg font-semibold ${
+              className={`p-2 rounded-lg text-lg font-semibold ${
                 isDarkMode 
                   ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' 
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               } focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2`}
             >
-              Clear
+              <TrashIcon className="h-4 w-4" />
             </button>
           </div>
 
