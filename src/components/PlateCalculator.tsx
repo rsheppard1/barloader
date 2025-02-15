@@ -15,7 +15,7 @@ const plates = [
 
 const barWeights = [15, 20];
 
-const Loader = () => {
+const PlateCalculator = () => {
   const [barWeight, setBarWeight] = useState(20);
   const [useCollars, setUseCollars] = useState(false);
   const [targetWeight, setTargetWeight] = useState('');
@@ -172,4 +172,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default PlateCalculator;
