@@ -125,6 +125,8 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <div className="relative">
               <select
                 value={barWeight}
+                id = "barWeight"
+                aria-label="Bar weight"
                 onChange={(e) => setBarWeight(Number(e.target.value))}
                 className={`block rounded-lg py-2 px-2 text-sm ${
                   isDarkMode 
@@ -143,6 +145,8 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
+                aria-label="Use collars"
+                id = "useCollars"
                 checked={useCollars}
                 onChange={(e) => {
                   setUseCollars(e.target.checked);
@@ -165,6 +169,7 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
               type="number"
               value={targetWeight}
               min="0"
+              id = "targetWeight"
               onChange={(e) => handleWeightInput(e.target.value)}
               className={`flex items-center justify-center w-24 rounded-lg text-center py-2 text-lg font-semibold ${
                 isDarkMode 
@@ -176,6 +181,7 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <div className={`text-lg font-semibold pr-5 ${isDarkMode ? 'text-white' : ''}`}>kg</div>
             <button
               onClick={clearPlates}
+              aria-label="Clear plates"
               className={`p-2 rounded-lg text-lg font-semibold ${
                 isDarkMode 
                   ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' 
