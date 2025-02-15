@@ -209,15 +209,6 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
             {/* Bar end */}
             <div className={`h-2 w-4 ${isDarkMode ? 'bg-gray-500' : 'bg-gray-400'} rounded-r`} />
           </div>
-
-          
-
-          {/* Total Weight Display */}
-          {targetWeight && (
-            <div className={`text-center text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-              {targetWeight} kg
-            </div>
-          )}
         </div>
       </div>
     </div>
