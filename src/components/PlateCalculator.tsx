@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { TrashIcon } from '@heroicons/react/20/solid';
+import { FaGithub } from 'react-icons/fa'
 
 // Define plate types with weights, colors, and pixel heights
 const plates = [
@@ -116,6 +117,14 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <div className={`p-2`}>
       <div className={`w-full max-w-2xl mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg rounded-lg p-6`}>
+      <a 
+        href="https://github.com/rsheppard1/barloader" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300" // Styling
+      >
+        <FaGithub size={24} />
+      </a>
         <h2 className={`text-2xl font-bold text-center ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
           Barbell Plate Calculator
         </h2>

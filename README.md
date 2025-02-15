@@ -59,4 +59,4 @@ No License
 
 ## Contact
 
-Rachel Sheppard - rshepp261@gmail.com
+[Rachel Sheppard](mailto:rshepp261@gmail.com) - [GitHub](https://github.com/rsheppard1) - [Repo](https://github.com/rsheppard1/barloader)
