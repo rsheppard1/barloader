@@ -1,27 +1,38 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// Define plate types with weights, colors, and relative sizes
+// Define plate types with weights, colors, and pixel heights
 const plates = [
-  { weight: 25, color: 'bg-red-600', size: 100 },
-  { weight: 20, color: 'bg-blue-600', size: 95 },
-  { weight: 15, color: 'bg-yellow-500', size: 90 },
-  { weight: 10, color: 'bg-green-600', size: 85 },
-  { weight: 5, color: 'bg-white border-2 text-zinc-900', size: 80 },
-  { weight: 2.5, color: 'bg-zinc-900', size: 75 },
-  { weight: 1.25, color: 'bg-zinc-400', size: 70 },
-  { weight: 0.5, color: 'bg-zinc-400', size: 70 },
-  { weight: 0.25, color: 'bg-zinc-400', size: 70 },
+  { weight: 25, color: 'bg-red-600', height: 280 },
+  { weight: 20, color: 'bg-blue-600', height: 260 },
+  { weight: 15, color: 'bg-yellow-500', height: 240 },
+  { weight: 10, color: 'bg-green-600', height: 220 },
+  { weight: 5, color: 'bg-white border-2 text-zinc-900', height: 200 },
+  { weight: 2.5, color: 'bg-zinc-900', height: 180 },
+  { weight: 1.25, color: 'bg-zinc-400', height: 160 },
+  { weight: 0.5, color: 'bg-zinc-400', height: 150 },
+  { weight: 0.25, color: 'bg-zinc-400', height: 140 },
 ];
 
 const barWeights = [15, 20];
 
 const PlateCalculator = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [barWeight, setBarWeight] = useState(20);
   const [useCollars, setUseCollars] = useState(false);
   const [targetWeight, setTargetWeight] = useState('');
   const [loadedPlates, setLoadedPlates] = useState<number[]>([]);
+
+  // Dark mode detection
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(darkModeMediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
+    darkModeMediaQuery.addEventListener('change', handler);
+    return () => darkModeMediaQuery.removeEventListener('change', handler);
+  }, []);
 
   const calculatePlates = (weight: number) => {
     const targetPlateWeight = weight - barWeight - (useCollars ? 5 : 0);
@@ -51,19 +62,21 @@ const PlateCalculator = () => {
   const addPlate = (weight: number) => {
     const newPlates = [...loadedPlates, weight].sort((a, b) => b - a); // Sort plates largest to smallest
     setLoadedPlates(newPlates);
-    const totalWeight = barWeight + 
-      (useCollars ? 5 : 0) + 
-      (newPlates.reduce((a, b) => a + b, 0) * 2);
+    const totalWeight = calculateTotalWeight(newPlates);
     setTargetWeight(totalWeight.toString());
   };
 
   const removePlate = (index: number) => {
     const newPlates = loadedPlates.filter((_, i) => i !== index);
     setLoadedPlates(newPlates);
-    const totalWeight = barWeight + 
-      (useCollars ? 5 : 0) + 
-      (newPlates.reduce((a, b) => a + b, 0) * 2);
+    const totalWeight = calculateTotalWeight(newPlates);
     setTargetWeight(totalWeight ? totalWeight.toString() : '');
+  };
+
+  const calculateTotalWeight = (platesArray: number[]) => {
+    return barWeight + 
+      (useCollars ? 5 : 0) + // 2.5kg per collar
+      (platesArray.reduce((a, b) => a + b, 0) * 2); // multiply by 2 for both sides
   };
 
   const clearPlates = () => {
@@ -71,9 +84,43 @@ const PlateCalculator = () => {
     setTargetWeight('');
   };
 
+  // Render the plates with collars always at the end
+  const renderPlatesAndCollars = () => {
+    const plateElements = loadedPlates.map((weight, index) => {
+      const plate = plates.find(p => p.weight === weight);
+      return (
+        <button
+          key={index}
+          onClick={() => removePlate(index)}
+          className={`w-4 ${plate?.color} rounded flex items-center justify-center text-xs text-white font-bold hover:opacity-90 transition-opacity`}
+          style={{ height: `${plate?.height}px` }}
+          title="Click to remove plate"
+        >
+          {weight}
+        </button>
+      );
+    });
+
+    if (useCollars) {
+      plateElements.push(
+        <div
+          key="collar"
+          className="w-2 bg-zinc-800 rounded flex items-center justify-center text-xs text-white font-bold"
+          style={{ height: '140px' }}
+        >
+          2.5
+        </div>
+      );
+    }
+
+    return plateElements;
+  };
+
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
-      <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Barbell Plate Calculator</h2>
+    <div className={`w-full max-w-2xl mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg rounded-lg p-6`}>
+      <h2 className={`text-2xl font-bold text-center ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
+        Barbell Plate Calculator
+      </h2>
       
       <div className="space-y-6">
         {/* Controls */}
@@ -83,7 +130,11 @@ const PlateCalculator = () => {
             <select
               value={barWeight}
               onChange={(e) => setBarWeight(Number(e.target.value))}
-              className="block rounded-md border-gray-300 py-2 px-3 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className={`block rounded-md py-2 px-3 ${
+                isDarkMode 
+                  ? 'bg-gray-700 text-white border-gray-600' 
+                  : 'bg-white text-gray-900 border-gray-300'
+              } focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
             >
               {barWeights.map((weight) => (
                 <option key={weight} value={weight}>
@@ -98,10 +149,18 @@ const PlateCalculator = () => {
             <input
               type="checkbox"
               checked={useCollars}
-              onChange={(e) => setUseCollars(e.target.checked)}
+              onChange={(e) => {
+                setUseCollars(e.target.checked);
+                if (targetWeight) {
+                  const currentWeight = parseFloat(targetWeight);
+                  if (!isNaN(currentWeight)) {
+                    setTargetWeight((currentWeight + (e.target.checked ? 5 : -5)).toString());
+                  }
+                }
+              }}
               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
             />
-            <span className="text-md text-gray-900">Comp. Collars</span>
+            <span className={`text-md ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Comp. Collars</span>
           </div>
         </div>
 
@@ -111,12 +170,20 @@ const PlateCalculator = () => {
             type="number"
             value={targetWeight}
             onChange={(e) => handleWeightInput(e.target.value)}
-            className="block w-32 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className={`block w-32 rounded-md shadow-sm ${
+              isDarkMode 
+                ? 'bg-gray-700 text-white border-gray-600' 
+                : 'bg-white border-gray-300'
+            } focus:border-blue-500 focus:ring-blue-500`}
             placeholder="Weight in kg"
           />
           <button
             onClick={clearPlates}
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className={`px-4 py-2 rounded-md ${
+              isDarkMode 
+                ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            } focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2`}
           >
             Clear
           </button>
@@ -128,7 +195,8 @@ const PlateCalculator = () => {
             <button
               key={plate.weight}
               onClick={() => addPlate(plate.weight)}
-              className={`h-${plate.size} w-12 rounded ${plate.color} text-white font-bold shadow-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+              className={`w-12 ${plate.color} rounded text-white font-bold shadow-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+              style={{ height: `${plate.height}px` }}
             >
               {plate.weight}
             </button>
@@ -136,36 +204,19 @@ const PlateCalculator = () => {
         </div>
 
         {/* Visual Representation */}
-        <div className="flex items-center justify-center space-x-2 bg-gray-50 p-4 rounded-lg">
+        <div className={`flex items-center justify-center space-x-2 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-50'} p-4 rounded-lg`}>
           {/* Bar end */}
-          <div className="h-2 w-8 bg-gray-400 rounded-l" />
+          <div className={`h-2 w-8 ${isDarkMode ? 'bg-gray-500' : 'bg-gray-400'} rounded-l`} />
           
-          {/* Collar if enabled */}
-          {useCollars && (
-            <div className="h-16 w-2 bg-zinc-800 rounded flex items-center justify-center text-xs text-white font-bold">
-              2.5
-            </div>
-          )}
-          
-          {/* Plates */}
-          {loadedPlates.map((weight, index) => {
-            const plate = plates.find(p => p.weight === weight);
-            return (
-              <button
-                key={index}
-                onClick={() => removePlate(index)}
-                className={`h-${plate?.size} w-4 ${plate?.color} rounded flex items-center justify-center text-xs text-white font-bold hover:opacity-90 transition-opacity`}
-                title="Click to remove plate"
-              >
-                {weight}
-              </button>
-            );
-          })}
+          {/* Plates and Collar */}
+          <div className="flex space-x-2">
+            {renderPlatesAndCollars()}
+          </div>
         </div>
 
         {/* Total Weight Display */}
         {targetWeight && (
-          <div className="text-center text-lg font-bold text-gray-900">
+          <div className={`text-center text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             Total: {targetWeight} kg
           </div>
         )}
