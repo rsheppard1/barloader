@@ -118,7 +118,6 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
         <h2 className={`text-2xl font-bold text-center ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
           Barbell Plate Calculator
         </h2>
-        
         <div className="space-y-6">
           {/* Controls */}
           <div className="flex flex-wrap gap-4 justify-center">
