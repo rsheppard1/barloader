@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Powerlifting Plate Loading Calculator
 
-## Getting Started
+A web application for powerlifters to visually calculate what plates to load on the barbell.  It works in both directions: users can select plates to visually load the bar and see the total weight, or they can enter a target weight and the app will show them which plates to use.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+*   **Visual Plate Loading:** Click plates to add them to the barbell visualisation.  The total weight is automatically calculated.
+*   **Target Weight Calculation:** Enter a target weight, and the app will determine the necessary plate combinations.
+*   **Bar Weight Selection:** Choose the barbell weight.
+*   **Collar Option:** Specify whether competition collars are being used.
+*   **Responsive Design:** Optimised for mobile devices.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   Next.js
+*   TypeScript
+*   Tailwind CSS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
 
-## Learn More
+1.  Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    git clone https://github.com/rsheppard1/barloader
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2.  Navigate to the project directory:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```bash
+    cd barloader
+    ```
 
-## Deploy on Vercel
+3.  Install dependencies:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm install  # or yarn install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Usage
+
+1.  Start the development server:
+
+    ```bash
+    npm run dev  # or yarn dev
+    ```
+
+2.  Open your browser and go to `http://localhost:3000` (or the address shown in your terminal).
+
+## How to Use
+
+*   **Visual Plate Loading:** Click on the available plates to add them to the barbell. Click again to remove them.
+*   **Target Weight Calculation:** Enter the desired weight in the input field.
+*   **Bar Weight:** Select the appropriate barbell weight from the dropdown.
+*   **Collars:** Check the box if you're using competition collars.
+
+## License
+
+No License
+
+## Future Enhancements
+
+*   Plate availability selection.
+*   More advanced plate selection (e.g., drag-and-drop).
+*   LBs support.
+
+## Contact
+
+Rachel Sheppard - rshepp261@gmail.com
