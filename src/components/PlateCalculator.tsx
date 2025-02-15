@@ -8,9 +8,11 @@ const plates = [
   { weight: 20, color: 'bg-blue-600', size: 95 },
   { weight: 15, color: 'bg-yellow-500', size: 90 },
   { weight: 10, color: 'bg-green-600', size: 85 },
-  { weight: 5, color: 'bg-zinc-100 border-2', size: 80 },
+  { weight: 5, color: 'bg-white border-2 text-zinc-900', size: 80 },
   { weight: 2.5, color: 'bg-zinc-900', size: 75 },
-  { weight: 1.25, color: 'bg-zinc-500', size: 70 },
+  { weight: 1.25, color: 'bg-zinc-400', size: 70 },
+  { weight: 0.5, color: 'bg-zinc-400', size: 70 },
+  { weight: 0.25, color: 'bg-zinc-400', size: 70 },
 ];
 
 const barWeights = [15, 20];
@@ -71,21 +73,21 @@ const PlateCalculator = () => {
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Plate Calculator (kg)</h2>
+      <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Barbell Plate Calculator</h2>
       
       <div className="space-y-6">
         {/* Controls */}
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
           {/* Bar Weight Selector */}
           <div className="relative">
             <select
               value={barWeight}
               onChange={(e) => setBarWeight(Number(e.target.value))}
-              className="block w-32 rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="block rounded-md border-gray-300 py-2 px-3 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
               {barWeights.map((weight) => (
                 <option key={weight} value={weight}>
-                  {weight} kg bar
+                  {weight}kg bar
                 </option>
               ))}
             </select>
@@ -99,12 +101,12 @@ const PlateCalculator = () => {
               onChange={(e) => setUseCollars(e.target.checked)}
               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
             />
-            <span className="text-sm font-medium text-gray-700">Competition Collars (2.5kg each)</span>
+            <span className="text-md text-gray-900">Comp. Collars</span>
           </div>
         </div>
 
         {/* Weight Input */}
-        <div className="flex items-center space-x-2">
+        <div className="flex pt-8 items-center justify-center space-x-2">
           <input
             type="number"
             value={targetWeight}
@@ -121,7 +123,7 @@ const PlateCalculator = () => {
         </div>
 
         {/* Plate Selection */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 items-center justify-center">
           {plates.map((plate) => (
             <button
               key={plate.weight}
@@ -134,7 +136,7 @@ const PlateCalculator = () => {
         </div>
 
         {/* Visual Representation */}
-        <div className="flex items-center space-x-2 bg-gray-50 p-4 rounded-lg">
+        <div className="flex items-center justify-center space-x-2 bg-gray-50 p-4 rounded-lg">
           {/* Bar end */}
           <div className="h-2 w-8 bg-gray-400 rounded-l" />
           
