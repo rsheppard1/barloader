@@ -90,7 +90,7 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
         <button
           key={index}
           onClick={() => removePlate(index)}
-          className={`w-4 ${plate?.color} rounded flex items-center justify-center text-xs text-white font-bold hover:opacity-90 transition-opacity`}
+          className={`w-4 ${plate?.color} rounded flex items-center justify-center text-[0.6rem] text-white font-bold hover:opacity-90 transition-opacity`}
           style={{ height: `${plate?.height}px` }}
           title="Tap to remove"
         >
@@ -190,7 +190,7 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
               <button
                 key={plate.weight}
                 onClick={() => addPlate(plate.weight)}
-                className={`w-4 ${plate.color} rounded text-white text-xs font-bold shadow-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+                className={`w-4 ${plate.color} rounded text-white text-[0.6rem] font-bold shadow-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
                 style={{ height: `${plate.height}px` }}
               >
                 {plate.weight}
@@ -201,13 +201,16 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
           {/* Visual Representation */}
           <div className={`flex items-center justify-center space-x-2 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-50'} p-4 rounded-lg`}>
             {/* Bar end */}
-            <div className={`h-2 w-8 ${isDarkMode ? 'bg-gray-500' : 'bg-gray-400'} rounded-l`} />
-            
+            <div className={`h-2 w-10 ${isDarkMode ? 'bg-gray-500' : 'bg-gray-400'}`} />
             {/* Plates and Collar */}
             <div className="flex space-x-2 items-center">
               {renderPlatesAndCollars()}
             </div>
+            {/* Bar end */}
+            <div className={`h-2 w-4 ${isDarkMode ? 'bg-gray-500' : 'bg-gray-400'} rounded-r`} />
           </div>
+
+          
 
           {/* Total Weight Display */}
           {targetWeight && (
