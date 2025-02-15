@@ -166,13 +166,14 @@ const PlateCalculator = ({ isDarkMode }: { isDarkMode: boolean }) => {
               value={targetWeight}
               min="0"
               onChange={(e) => handleWeightInput(e.target.value)}
-              className={`block w-36 rounded-lg text-center p-2 text-lg font-semibold ${
+              className={`flex items-center justify-center w-24 rounded-lg text-center py-2 text-lg font-semibold ${
                 isDarkMode 
                   ? 'bg-gray-700 text-white border-gray-600' 
                   : 'bg-white border-gray-300'
               } focus:border-blue-500 focus:ring-blue-500`}
-              placeholder="Weight (kg)"
+              placeholder="Weight"
             />
+            <div className={`text-lg font-semibold pr-5 ${isDarkMode ? 'text-white' : ''}`}>kg</div>
             <button
               onClick={clearPlates}
               className={`p-2 rounded-lg text-lg font-semibold ${
