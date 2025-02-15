@@ -5,14 +5,14 @@ import React, { useState, useEffect } from 'react';
 // Define plate types with weights, colors, and pixel heights
 const plates = [
   { weight: 25, color: 'bg-red-600', height: 140 },
-  { weight: 20, color: 'bg-blue-600', height: 130 },
-  { weight: 15, color: 'bg-yellow-500', height: 120 },
-  { weight: 10, color: 'bg-green-600', height: 110 },
-  { weight: 5, color: 'bg-white border-2 text-zinc-900', height: 100 },
-  { weight: 2.5, color: 'bg-zinc-900', height: 90 },
-  { weight: 1.25, color: 'bg-zinc-400', height: 80 },
-  { weight: 0.5, color: 'bg-zinc-400', height: 75 },
-  { weight: 0.25, color: 'bg-zinc-400', height: 70 },
+  { weight: 20, color: 'bg-blue-600', height: 140 },
+  { weight: 15, color: 'bg-yellow-500', height: 124 },
+  { weight: 10, color: 'bg-green-600', height: 101 },
+  { weight: 5, color: 'bg-white border-2 text-zinc-900', height: 71 },
+  { weight: 2.5, color: 'bg-zinc-900', height: 59 },
+  { weight: 1.25, color: 'bg-zinc-400', height: 50 },
+  { weight: 0.5, color: 'bg-zinc-400', height: 42 },
+  { weight: 0.25, color: 'bg-zinc-400', height: 35 },
 ];
 
 const barWeights = [15, 20];
@@ -103,7 +103,7 @@ const PlateCalculator = () => {
           onClick={() => removePlate(index)}
           className={`w-4 ${plate?.color} rounded flex items-center justify-center text-xs text-white font-bold hover:opacity-90 transition-opacity`}
           style={{ height: `${plate?.height}px` }}
-          title="Click to remove plate"
+          title="Tap to remove"
         >
           {weight}
         </button>
@@ -114,11 +114,9 @@ const PlateCalculator = () => {
       plateElements.push(
         <div
           key="collar"
-          className="w-2 bg-zinc-800 rounded flex items-center justify-center text-xs text-white font-bold"
-          style={{ height: '70px' }}
-        >
-          2.5
-        </div>
+          className="w-4 h-8 bg-gradient-to-b from-yellow-400 to-yellow-600 border-2 border-yellow-700 rounded flex items-center justify-center"
+          title="Comp. Collar"
+        />
       );
     }
 
@@ -126,7 +124,7 @@ const PlateCalculator = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-gray-100'`}>
+    <div className={`p-2`}>
       <div className={`w-full max-w-2xl mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg rounded-lg p-6`}>
         <h2 className={`text-2xl font-bold text-center ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>
           Barbell Plate Calculator
@@ -139,11 +137,11 @@ const PlateCalculator = () => {
               <select
                 value={barWeight}
                 onChange={(e) => setBarWeight(Number(e.target.value))}
-                className={`block rounded-lg py-2 px-3 text-lg font-semibold ${
+                className={`block rounded-lg py-2 px-2 text-sm ${
                   isDarkMode 
                     ? 'bg-gray-700 text-white border-gray-600' 
                     : 'bg-white text-gray-900 border-gray-300'
-                } focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                } focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 `}
               >
                 {barWeights.map((weight) => (
                   <option key={weight} value={weight}>
@@ -168,7 +166,7 @@ const PlateCalculator = () => {
                 }}
                 className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               />
-              <span className={`text-md ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Comp. Collars</span>
+              <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Comp. Collars</span>
             </div>
           </div>
 
@@ -183,7 +181,7 @@ const PlateCalculator = () => {
                   ? 'bg-gray-700 text-white border-gray-600' 
                   : 'bg-white border-gray-300'
               } focus:border-blue-500 focus:ring-blue-500`}
-              placeholder="Weight in kg"
+              placeholder="Weight (kg)"
             />
             <button
               onClick={clearPlates}
